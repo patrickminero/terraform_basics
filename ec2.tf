@@ -1,8 +1,8 @@
 resource "aws_instance" "first_server" {
-  ami             = "ami-0dfcb1ef8550277af"
-  instance_type   = "t2.micro"
+  ami             = var.image_id
+  instance_type   = var.instance_type
   key_name        = "terraform"
-  security_groups = ["terraform-sg"]
+  security_groups = [aws_security_group.terraform-sg.name]
   user_data       = <<EOF
   #!/bin/bash
   yum -y update
@@ -23,10 +23,10 @@ resource "aws_eip" "first_server_eip" {
 }
 
 resource "aws_instance" "second_server" {
-  ami             = "ami-0dfcb1ef8550277af"
-  instance_type   = "t2.micro"
+  ami             = var.image_id
+  instance_type   = var.instance_type
   key_name        = "terraform"
-  security_groups = ["terraform-sg"]
+  security_groups = [aws_security_group.terraform-sg.name]
   user_data       = <<EOF
   #!/bin/bash
   yum -y update

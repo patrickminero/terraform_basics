@@ -1,7 +1,7 @@
 resource "aws_elb" "terraform" {
   name               = "terraform-elb"
-  availability_zones = ["us-east-1e"]
-  security_groups = [aws_security_group.terraform-sg.id]
+  availability_zones = var.availability_zones
+  security_groups    = [aws_security_group.terraform-sg.id]
 
   listener {
     instance_port     = 80
